@@ -15,6 +15,7 @@ int main(){
     else if(n == 'd'){
         cout << "Enter value to Decrypt : ";
         cin >> sen;
+        cout << dec(sen);
     }
     else{
         cout << "this command is not found";
