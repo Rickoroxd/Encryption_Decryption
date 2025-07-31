@@ -4,6 +4,7 @@
 #include <string>
 using namespace std;
 
+
 string enc(string input);
 string dec(string input);
 
