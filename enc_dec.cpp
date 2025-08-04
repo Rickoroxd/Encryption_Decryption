@@ -1,6 +1,9 @@
 #include "enc_dec.h"
 #include <string>
 #include <iostream>
+#include <stdlib.h>
+#include <vector>
+
 using namespace std;
 
 string enc(string input){
@@ -37,6 +40,24 @@ string dec(string input){
             }
         }
         cout<<endl;
+    }
+    return "success";
+}
+
+bool checker_in_vector(vector<char> &memo,string input){
+    for(int i = 0 ; i < string.length(); i++){
+        for(int j = 0 ; j < 26 ; j++ ){
+            
+        }
+    }
+}
+
+string mono(string input){
+    vector<char> memo (26);
+    srand(26);
+    
+    for(int i =0;i < input.length();i++){
+        
     }
     return "success";
 }
