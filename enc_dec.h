@@ -7,5 +7,6 @@ using namespace std;
 
 string enc(string input);
 string dec(string input);
+string mono(string input);
 
 #endif

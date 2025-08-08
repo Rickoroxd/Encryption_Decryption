@@ -44,20 +44,40 @@ string dec(string input){
     return "success";
 }
 
-bool checker_in_vector(vector<char> &memo,string input){
-    for(int i = 0 ; i < string.length(); i++){
-        for(int j = 0 ; j < 26 ; j++ ){
-            
-        }
-    }
-}
+
+
+
+
+// for monoalphabetic substitution cipher
+vector<int> encMapUpper(26, -1);
+vector<int> encMapLower(26, -1);
 
 string mono(string input){
-    vector<char> memo (26);
-    srand(26);
-    
-    for(int i =0;i < input.length();i++){
-        
+    string newString = "";
+    for(int i = 0;i<input.length();i++){
+        if(isalpha(input[i])){
+            if(isupper(input[i])){
+                int index = input[i] - 'A';
+                if(encMapUpper[index] == -1){
+                    encMapUpper[index] = (rand()%26) + 'A';
+                }
+                else{
+                    newString += char(encMapUpper[index]);
+                }
+            }
+            else{
+                int index = input[i] - 'a';
+                if(encMapLower[index] == -1){
+                    encMapUpper[index] = (rand() % 26) + 'a';
+                }
+                else{
+                    newString+=char(encMapLower[index]);
+                }
+            }
+        }
+        else{
+            newString+= input[i];
+        }
     }
-    return "success";
+    return newString;
 }
