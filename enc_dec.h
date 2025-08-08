@@ -8,5 +8,5 @@ using namespace std;
 string enc(string input);
 string dec(string input);
 string mono(string input);
-
+string monoDecrypt(string input);
 #endif

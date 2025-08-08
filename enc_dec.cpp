@@ -61,22 +61,46 @@ string mono(string input){
                 if(encMapUpper[index] == -1){
                     encMapUpper[index] = (rand()%26) + 'A';
                 }
-                else{
-                    newString += char(encMapUpper[index]);
-                }
+                newString += char(encMapUpper[index]);
             }
             else{
                 int index = input[i] - 'a';
                 if(encMapLower[index] == -1){
-                    encMapUpper[index] = (rand() % 26) + 'a';
+                    encMapLower[index] = (rand() % 26) + 'a';
                 }
-                else{
-                    newString+=char(encMapLower[index]);
-                }
+                newString+=char(encMapLower[index]);
             }
         }
         else{
             newString+= input[i];
+        }
+    }
+    return newString;
+}
+
+
+string monoDecrypt(string input) {
+    vector<int> decMapUpper(26, -1);
+    vector<int> decMapLower(26, -1);
+
+    // สร้าง reverse mapping
+    for (int i = 0; i < 26; i++) {
+        if (encMapUpper[i] != -1)
+            decMapUpper[encMapUpper[i] - 'A'] = 'A' + i;
+        if (encMapLower[i] != -1)
+            decMapLower[encMapLower[i] - 'a'] = 'a' + i;
+    }
+
+    string newString = "";
+    for (int i = 0; i < input.length(); i++) {
+        if (isalpha(input[i])) {
+            if (isupper(input[i])) {
+                newString += char(decMapUpper[input[i] - 'A']);
+            } else {
+                newString += char(decMapLower[input[i] - 'a']);
+            }
+        } else {
+            newString += input[i];
         }
     }
     return newString;
