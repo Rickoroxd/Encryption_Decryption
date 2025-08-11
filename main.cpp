@@ -8,29 +8,29 @@ int main(){
     srand(time(0)); 
     generateMapping();
     char choice;
-    cout << "Enter [D : Decryptions / E : Encryption ]";
+    cout << "Enter [D : Decryptions / E : Encryption ]  :";
     cin >> choice;
     string sen;
-    if(isupper(choice) == 'D'){
-        cout << "What String do tou want to Decryption";
+    string enc_sen = "";
+    string dec_sen = "";
+    if(toupper(choice) == 'D'){
+        cout << "What String do tou want to Decryption :";
         cin >> sen;
-        string enc = mono(sen);
-        
+        enc_sen = monoDecrypt(sen);
+        cout << "Original : " << sen << "\n";
+        cout << "Encrypted: " << enc_sen << "\n";
     }
-    else if(isupper(choice) =='E'){
-        cout << "What String do you want to Encryption";
+    else if(toupper(choice) =='E'){
+        cout << "What String do you want to Encryption :";
         cin >> sen;
-        string dec = monoDecrypt(sen);
-
+        dec_sen = mono(sen);
+        cout << "Original : " << sen << "\n";
+        cout << "Decrypted: " << dec_sen << "\n";
     }
     else{
         cout << "no command";
-        exit();
+        exit(1);
     }
-
-    cout << "Original : " << sen << "\n";
-    cout << "Encrypted: " << enc << "\n";
-    cout << "Decrypted: " << dec << "\n";
     
     return 0;
 }
