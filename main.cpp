@@ -1,10 +1,20 @@
 #include<iostream>
 #include<string>
 #include "enc_dec.h"
+#include<ctime>
 using namespace std;
 
 int main(){
-    cout << mono("password")<<endl;
-    cout << monoDecrypt("phqqghum");
+    srand(time(0)); 
+    generateMapping();
+
+    string text = "password";
+    string enc = mono(text);
+    string dec = monoDecrypt(enc);
+
+    cout << "Original : " << text << "\n";
+    cout << "Encrypted: " << enc << "\n";
+    cout << "Decrypted: " << dec << "\n";
+    
     return 0;
 }

@@ -1,8 +1,6 @@
 #include "enc_dec.h"
-#include <string>
-#include <iostream>
-#include <stdlib.h>
-#include <vector>
+#include<bits/stdc++.h>
+
 
 using namespace std;
 
@@ -48,31 +46,36 @@ string dec(string input){
 
 
 
-// for monoalphabetic substitution cipher
+
 vector<int> encMapUpper(26, -1);
 vector<int> encMapLower(26, -1);
 
-string mono(string input){
+
+void generateMapping() {
+    vector<char> lettersUpper(26), lettersLower(26);
+    iota(lettersUpper.begin(), lettersUpper.end(), 'A'); 
+    iota(lettersLower.begin(), lettersLower.end(), 'a'); 
+
+    
+    random_shuffle(lettersUpper.begin(), lettersUpper.end());
+    random_shuffle(lettersLower.begin(), lettersLower.end());
+
+    for (int i = 0; i < 26; i++) {
+        encMapUpper[i] = lettersUpper[i];
+        encMapLower[i] = lettersLower[i];
+    }
+}
+
+
+string mono(string input) {
     string newString = "";
-    for(int i = 0;i<input.length();i++){
-        if(isalpha(input[i])){
-            if(isupper(input[i])){
-                int index = input[i] - 'A';
-                if(encMapUpper[index] == -1){
-                    encMapUpper[index] = (rand()%26) + 'A';
-                }
-                newString += char(encMapUpper[index]);
-            }
-            else{
-                int index = input[i] - 'a';
-                if(encMapLower[index] == -1){
-                    encMapLower[index] = (rand() % 26) + 'a';
-                }
-                newString+=char(encMapLower[index]);
-            }
-        }
-        else{
-            newString+= input[i];
+    for (char c : input) {
+        if (isupper(c)) {
+            newString += char(encMapUpper[c - 'A']);
+        } else if (islower(c)) {
+            newString += char(encMapLower[c - 'a']);
+        } else {
+            newString += c;
         }
     }
     return newString;
@@ -80,27 +83,20 @@ string mono(string input){
 
 
 string monoDecrypt(string input) {
-    vector<int> decMapUpper(26, -1);
-    vector<int> decMapLower(26, -1);
-
-    // สร้าง reverse mapping
+    vector<int> decMapUpper(26, -1), decMapLower(26, -1);
     for (int i = 0; i < 26; i++) {
-        if (encMapUpper[i] != -1)
-            decMapUpper[encMapUpper[i] - 'A'] = 'A' + i;
-        if (encMapLower[i] != -1)
-            decMapLower[encMapLower[i] - 'a'] = 'a' + i;
+        decMapUpper[encMapUpper[i] - 'A'] = 'A' + i;
+        decMapLower[encMapLower[i] - 'a'] = 'a' + i;
     }
 
     string newString = "";
-    for (int i = 0; i < input.length(); i++) {
-        if (isalpha(input[i])) {
-            if (isupper(input[i])) {
-                newString += char(decMapUpper[input[i] - 'A']);
-            } else {
-                newString += char(decMapLower[input[i] - 'a']);
-            }
+    for (char c : input) {
+        if (isupper(c)) {
+            newString += char(decMapUpper[c - 'A']);
+        } else if (islower(c)) {
+            newString += char(decMapLower[c - 'a']);
         } else {
-            newString += input[i];
+            newString += c;
         }
     }
     return newString;
