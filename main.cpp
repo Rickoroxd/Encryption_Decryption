@@ -7,12 +7,28 @@ using namespace std;
 int main(){
     srand(time(0)); 
     generateMapping();
+    char choice;
+    cout << "Enter [D : Decryptions / E : Encryption ]";
+    cin >> choice;
+    string sen;
+    if(isupper(choice) == 'D'){
+        cout << "What String do tou want to Decryption";
+        cin >> sen;
+        string enc = mono(sen);
+        
+    }
+    else if(isupper(choice) =='E'){
+        cout << "What String do you want to Encryption";
+        cin >> sen;
+        string dec = monoDecrypt(sen);
 
-    string text = "password";
-    string enc = mono(text);
-    string dec = monoDecrypt(enc);
+    }
+    else{
+        cout << "no command";
+        exit();
+    }
 
-    cout << "Original : " << text << "\n";
+    cout << "Original : " << sen << "\n";
     cout << "Encrypted: " << enc << "\n";
     cout << "Decrypted: " << dec << "\n";
     
